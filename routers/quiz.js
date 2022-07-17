@@ -201,7 +201,7 @@ router.post("/start-quiz:id", async (req, res) => {
         const total_time = Number(req.body.total_time) + time_taken;
 
         var answer = await Submission.findOne({ _id: ans_id });
-        console.log("in quiz ", answer, total_score, total_time, val);
+
         var ans_len = answer.count;
 
         if (ans_len != pointer) {

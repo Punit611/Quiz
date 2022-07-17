@@ -33,7 +33,6 @@ router.get("/details:id", async (req, res) => {
             }
             var details = [];
 
-            // console.log(ans,id);
             const q_id = ans.quiz;
             const q = await Quiz.findOne({ _id: q_id });
             const submissionTime = ans.submissionDate;
@@ -62,10 +61,8 @@ router.get("/details:id", async (req, res) => {
 
                 var tem = clone(data);
                 details.push(tem);
-                // console.log(data,i,details);
 
             }
-            // console.log(details);
 
             res.render('details.ejs', { isLoggedIn, user, month, details, submissionTime, id, title, username });
         }

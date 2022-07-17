@@ -38,7 +38,7 @@ router.get("/read:id", async (req, res) => {
             }
 
             var details = [];
-
+            console.log(quiz.submission);
             for (let i in quiz.submission) {
                 var sub = await Submission.findOne({ _id: quiz.submission[i] });
                 data.username = sub.username;
@@ -51,9 +51,6 @@ router.get("/read:id", async (req, res) => {
                 details.push(tem);
 
             }
-
-            console.log(details);
-            // console.log(quiz);
 
             res.render('read.ejs', { quiz, isLoggedIn, user, details });
         }

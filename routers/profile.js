@@ -24,7 +24,6 @@ router.get("/profile", async (req, res) => {
             }
         });
 
-        // console.log(quiz);
 
         res.render('profile.ejs', { quiz, isLoggedIn, user, month, user_data });
     }
