@@ -1,0 +1,177 @@
+<%- include('partials/header') %>
+
+  <head>
+    <link rel="stylesheet" href="/blog.css">
+  </head>
+  <div style="margin: 50px;" >
+    <input type="text" value="http://localhost:3000/quiz:<%-id%>" id="myInput">
+
+    <button onclick="myFunction()">Copy text</button>
+    
+    <h1 style="color: rgb(251, 247, 3); margin:50px 0px 10px 0px; text-align:center">
+      <%=title%>
+    </h1>
+    <form action="/start-quiz:<%-id%>" method="post">
+    
+    <div style="text-align: center; background-color: aliceblue;">
+        <div class="flex-container1 col-4 col-sm-1 col-md-1 col-lg-2">
+
+            <span style="background-color: red;">Total Score:<%-total_score%></span>
+            <span style="background-color: yellow;">Total time:<%-total_time%></span>
+        </div>
+        <div class="flex-container1 col-4 col-sm-1 col-md-1 col-lg-2" style="background-color: rgb(174, 133, 30);">
+        <% if(!data.mcq) {%>
+            Single correct answer
+        <%} else {%>
+            Multiple correct answer
+        <%}%>
+        
+        </div>
+        <div class="flex-container1 col-4 col-sm-1 col-md-1 col-lg-2">
+            Maximum Score: <%- data.score %>
+        </div>
+        <div class="flex-container1 col-4 col-sm-1 col-md-1 col-lg-2">
+            Timer : <span id="timer" >0</span>
+        </div>    
+    </div>
+
+    <div style="background-color: rgb(41, 93, 139);" class="flex-container col-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="flex-child magenta">
+        <div>
+        <div class="card" style="margin: 10px;">
+                <div onmousedown='return false;' onselectstart='return false;' class="card-body">
+                <p style=" padding: 10px; background-color: rgb(12, 158, 177);" class="card-text">
+                    <b>Question:
+                    <%= (Number(pointer)+1) +"  "+ data.question %>
+                    </b>
+                </p>
+                
+                <p style="padding: 10px; background-color: rgb(164, 231, 209); " class="card-text" onclick="option(1)" id="option1">
+                    <b>Option 1:</b>
+                    <%= data.option1[0] %>
+                </p>
+
+                <p style=" padding: 10px; background-color: rgb(164, 231, 209);" class="card-text" onclick="option(2)" id="option2">
+                        <b>Option 2:</b>
+                    
+                        <%= data.option2[0] %>
+
+                </p>
+                <p style=" padding: 10px; background-color: rgb(164, 231, 209); " class="card-text" onclick="option(3)" id="option3">
+                        <b>Option 3:</b>
+                        <%= data.option3[0] %>
+                </p>
+                <p style=" padding: 10px; background-color: rgb(164, 231, 209);"  class="card-text" onclick="option(4)" id="option4">
+                        <b>Option 4:</b>
+                        <%=  data.option4[0] %>
+                </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div style="display: none;">
+            
+            <input type="textarea" name="content" id="content" rows="10" cols="70" >
+            <input name="total_score" value="<%-total_score%>">
+            <input name="total_time" value="<%-total_time%>">
+            <input name="timer1" id="timer1">
+            <input name="ans_id" id="ans_id">
+            <input name="mxtime" id="mxtime">
+            <input name="pointer" id="pointer">
+            <input type="radio" name="answer1" id="answer1">
+            <input type="radio" name="answer2" id="answer2">
+            <input type="radio" name="answer3" id="answer3">
+            <input type="radio" name="answer4" id="answer4">
+        </div>
+        
+    </div>
+    <br><br>
+</div>
+</div>
+<div style="text-align: center;">
+    <Button type="submit" id="button">Save & Next</Button>
+</div>
+     
+</form>   
+      <!-- </div>
+
+
+
+                </div>
+              </div> -->
+
+<script>
+    var time=<%-time%>;
+    var mxtime=time;
+    var d2=document.getElementById("mxtime");
+    d2.value=mxtime;
+    d2=document.getElementById("pointer");
+    d2.value=<%=pointer%>;
+
+    d2=document.getElementById("content");
+    d2.value="<%=content%>";
+    d2=document.getElementById("ans_id");
+    d2.value="<%=ans_id%>";
+
+
+    function func()
+    {
+        setInterval(() => {
+            var d=document.getElementById("timer");
+            var d1=document.getElementById("timer1");
+            d.innerHTML=time;
+            d1.value=time;
+            if(time<20)
+            {
+                d.style.color="Red";
+            }
+            if(time==0)
+            {
+                var b=document.getElementById("button");
+                b.click();
+            }
+            time--;
+            
+        }, 1000);
+    }
+    func();
+
+    function option(num){
+        console.log(num);
+
+
+        var op=document.getElementById("option"+num);
+        var ans=document.getElementById("answer"+num);
+        if(ans.checked)
+        {
+            ans.checked=false;
+            op.style.background="rgb(164, 231, 209)";
+        }
+        else
+        {
+            op.style.background="green";
+            ans.checked=true;
+        }
+    }
+
+    function myFunction() {
+        /* Get the text field */
+        console.log("copy");
+        var copyText = document.getElementById("myInput");
+
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+        /* Copy the text inside the text field */
+        navigator.clipboard.writeText(copyText.value);
+
+        /* Alert the copied text */
+        alert("Copied the text: " + copyText.value);
+}
+</script>
+              
+    
+<%- include('partials/footer') %>
