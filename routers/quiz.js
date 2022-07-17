@@ -193,7 +193,9 @@ router.post("/start-quiz:id",async(req,res)=>{
         score: Number(quiz.question[pointer].score),
         timer:Number(quiz.question[pointer].timer)
     }
+
     var time_taken=data.timer-Number(req.body.timer1);
+    
     var solution={
         option1:req.body.answer1,
         option2:req.body.answer2,

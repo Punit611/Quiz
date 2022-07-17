@@ -40,7 +40,7 @@ img {
 .nav_btn {
   background-color: rgb(183, 255, 255);
 }
-
+/* 
 .flex-container {
   display: inline-flex;
   margin-top: 10px;
@@ -53,7 +53,7 @@ img {
   text-align: center;
   margin: 10px;
   /* border: 2px solid rgb(67, 67, 47); */
-}
+} */
 
 .flex-child {
   flex: 1;
@@ -72,7 +72,6 @@ img {
 body{
   font-family: Helvetica;
   -webkit-font-smoothing: antialiased;
-  background: rgba( 71, 147, 227, 1);
 }
 h2{
   text-align: center;
